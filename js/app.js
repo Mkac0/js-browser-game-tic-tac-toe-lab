@@ -22,7 +22,7 @@ let tie;
 
 const squareEls = document.querySelectorAll('.sqr');
 const messageEl = document.getElementById('message');
-const boardEl = document.getSelector('.board');
+const boardEl = document.querySelector('.board');
 const resetBtnEl = document.getElementById('reset');
 console.log(squareEls);
 console.log(messageEl);
@@ -32,7 +32,7 @@ console.log(messageEl);
 function init() {
     console.log('init called');
     board = Array(9).fill('');
-    turn = 'x';
+    turn = 'X';
     winner = false;
     tie = false;
     render();
@@ -53,7 +53,7 @@ function updateMessage() {
     if (tie && !winner) {
         messageEl.textContent = `It's a tie`;
     }else if (!winner && !tie) {
-        messageEl.textContent = `${turn}, turn`;
+        messageEl.textContent = `${turn}'s, turn`;
     } else {
         const lastPlayer = turn === 'X' ? 'O' : 'X';
         messageEl.textContent = `${lastPlayer} wins`;
@@ -93,16 +93,14 @@ function switchPlayerTurn() {
 
 
 function handleClick(event) {
-    if (!event.target.classList.contains('sqr'))
-        return;
-    const squareIndex = Number(event.target);
-    if (board[squareIndex] = winner);
-    return;
+    if (!event.target.classList.contains('sqr')) return;
+    const squareIndex = Number(event.target.id);
+    if (winner || board[squareIndex] !== '') return;
 
     placePiece(squareIndex);
     checkForWinner();
     checkForTie();
-    switchPlayerTurn();
+    if (!winner) switchPlayerTurn();
     render();
 };
 
@@ -110,6 +108,9 @@ function handleClick(event) {
 
 boardEl.addEventListener('click', handleClick);
 resetBtnEl.addEventListener('click', init);
+
+init();
+console.log(init);
 
 // Pseudocode
 //1) Define the required variables used to track the state of the game.
