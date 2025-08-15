@@ -55,7 +55,7 @@ function updateMessage() {
     }else if (!winner && !tie) {
         messageEl.textContent = `${turn}'s, turn`;
     } else {
-        const lastPlayer = turn === 'X' ? 'O' : 'X';
+        // const lastPlayer = turn === 'X' ? 'O' : 'X';
         messageEl.textContent = `${lastPlayer} wins`;
     };
 };
